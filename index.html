@@ -80,16 +80,23 @@
 
 <script>
     document.getElementById('bookmarkButton').addEventListener('click', function () {
+        var url = window.location.href;
+        var title = document.title;
+
         if (window.sidebar && window.sidebar.addPanel) { // Firefox
-            window.sidebar.addPanel(document.title, window.location.href, '');
+            window.sidebar.addPanel(title, url, '');
         } else if (window.external && ('AddFavorite' in window.external)) { // IE
-            window.external.AddFavorite(location.href, document.title);
+            window.external.AddFavorite(url, title);
         } else if (window.opera && window.print) { // Opera
             var elem = document.createElement('a');
-            elem.setAttribute('href', window.location.href);
-            elem.setAttribute('title', document.title);
+            elem.setAttribute('href', url);
+            elem.setAttribute('title', title);
             elem.setAttribute('rel', 'sidebar');
             elem.click();
+        } else if (window.chrome) { // Chrome
+            alert('请使用Ctrl+D手动添加书签');
+        } else if (window.safari) { // Safari
+            alert('请使用Ctrl+D手动添加书签');
         } else {
             alert('您的浏览器不支持此操作，请使用浏览器菜单手动添加书签。');
         }
