@@ -78,10 +78,8 @@
 </body>
 
 
-<!-- JavaScript 代码 -->
 <script>
     document.getElementById('bookmarkButton').addEventListener('click', function () {
-        // 添加网站到书签
         if (window.sidebar && window.sidebar.addPanel) { // Firefox
             window.sidebar.addPanel(document.title, window.location.href, '');
         } else if (window.external && ('AddFavorite' in window.external)) { // IE
