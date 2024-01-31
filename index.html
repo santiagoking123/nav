@@ -54,7 +54,7 @@
     </section>
 
 
-    <section id="site4" class="mb-8">
+    <section id="bookmarkButton" class="mb-8">
         <button class="bg-red-500 text-white px-4 py-2 rounded-full mt-2 hover:bg-red-700 transition">
             <a href="#" class="hover:no-underline cursor-pointer">请将本站以及本站提供的站点地址收藏到书签！</a>
          </button>
@@ -76,4 +76,28 @@
 
    
 </body>
+
+
+<!-- JavaScript 代码 -->
+<script>
+    document.getElementById('bookmarkButton').addEventListener('click', function () {
+        // 添加网站到书签
+        if (window.sidebar && window.sidebar.addPanel) { // Firefox
+            window.sidebar.addPanel(document.title, window.location.href, '');
+        } else if (window.external && ('AddFavorite' in window.external)) { // IE
+            window.external.AddFavorite(location.href, document.title);
+        } else if (window.opera && window.print) { // Opera
+            var elem = document.createElement('a');
+            elem.setAttribute('href', window.location.href);
+            elem.setAttribute('title', document.title);
+            elem.setAttribute('rel', 'sidebar');
+            elem.click();
+        } else {
+            alert('您的浏览器不支持此操作，请使用浏览器菜单手动添加书签。');
+        }
+    });
+</script>
+    
+
+    
 </html>
